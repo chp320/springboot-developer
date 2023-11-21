@@ -11,8 +11,12 @@ package com.skyfox83.springbootdeveloper.domain;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
+@NoArgsConstructor
 public class Article {
 
     @Id
@@ -27,12 +31,12 @@ public class Article {
     private String content;
 
     // 빌더 패턴으로 객체 생성
-    @Builder
+    @Builder    // lombok 에서 제공하는 애너테이션
     public Article(String title, String content) {
         this.title = title;
         this.content = content;
     }
-
+/*  @Getter, @NoArgsConstructor 애너테이션 대치를 위해 주석 처리
     // 기본 생성자 -> @NoArgsConstructor(access = AccessLevel.PROTECTED) 로도 작성 가능
     protected Article() {}
 
@@ -49,4 +53,5 @@ public class Article {
     public String getContent() {
         return content;
     }
+ */
 }
