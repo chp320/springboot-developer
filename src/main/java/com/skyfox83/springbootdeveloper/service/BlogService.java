@@ -2,7 +2,9 @@ package com.skyfox83.springbootdeveloper.service;
 
 import com.skyfox83.springbootdeveloper.domain.Article;
 import com.skyfox83.springbootdeveloper.dto.AddArticleRequest;
+import com.skyfox83.springbootdeveloper.dto.UpdateArticleRequest;
 import com.skyfox83.springbootdeveloper.repository.BlogRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +35,16 @@ public class BlogService {
     // 블로그 글 삭제 메서드 (using id)
     public void delete(long id) {
         blogRepository.deleteById(id);
+    }
+
+    // 블로그 글 수정 메서드
+    @Transactional
+    public Article update(long id, UpdateArticleRequest request) {
+        Article article = blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+
+        article.update(request.getTitle(), request.getContent());
+
+        return article;
     }
 }

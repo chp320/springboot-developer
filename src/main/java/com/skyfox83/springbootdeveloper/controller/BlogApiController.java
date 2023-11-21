@@ -3,6 +3,7 @@ package com.skyfox83.springbootdeveloper.controller;
 import com.skyfox83.springbootdeveloper.domain.Article;
 import com.skyfox83.springbootdeveloper.dto.AddArticleRequest;
 import com.skyfox83.springbootdeveloper.dto.ArticleResponse;
+import com.skyfox83.springbootdeveloper.dto.UpdateArticleRequest;
 import com.skyfox83.springbootdeveloper.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -57,5 +58,14 @@ public class BlogApiController {
 
         return ResponseEntity.ok()
                 .build();
+    }
+
+    // id로 PUT 요청 인입 시, 해당 글 수정 위해 메서드 맵핑
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody UpdateArticleRequest request) {
+        Article updateArticle = blogService.update(id, request);
+
+        return ResponseEntity.ok()
+                .body(updateArticle);
     }
 }
