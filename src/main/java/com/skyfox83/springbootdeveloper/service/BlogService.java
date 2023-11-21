@@ -19,8 +19,14 @@ public class BlogService {
         return blogRepository.save(request.toEntity());     // JpaRepository 에서 지원하는 저장 메서드 save() 로 AddArticleRequest 클래스에 저장된 값을 article DB에 저장
     }
 
-    // 블로그 글 조회 메서드
+    // 블로그 글 전체 조회 메서드
     public List<Article> findAll() {
         return blogRepository.findAll();
+    }
+
+    // 블로그 글 하나 조회 메서드
+    public Article findById(long id) {
+        return blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));   // .orElseThrow() - 대상이 없으면 exception을 던져라
     }
 }

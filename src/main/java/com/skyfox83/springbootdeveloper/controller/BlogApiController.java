@@ -7,10 +7,7 @@ import com.skyfox83.springbootdeveloper.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,5 +38,15 @@ public class BlogApiController {
 
         return ResponseEntity.ok()
                 .body(articles);
+    }
+
+    // id로 GET 요청 인입 시, 해당 글 조회를 위해 메서드 맵핑
+    @GetMapping("/api/articles/{id}")
+    public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id) {
+        // @PathVariable - 애너테이션 뒤에 따라오는 변수명을 URL에서 동일한 변수명을 찾아서 인수로 처리함
+        Article article = blogService.findById(id);
+
+        return ResponseEntity.ok()
+                .body(new ArticleResponse(article));    // 요청한 데이터를 찾으면 Response body 에 담아 브라우저로 전송
     }
 }
