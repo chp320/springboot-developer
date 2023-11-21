@@ -49,4 +49,13 @@ public class BlogApiController {
         return ResponseEntity.ok()
                 .body(new ArticleResponse(article));    // 요청한 데이터를 찾으면 Response body 에 담아 브라우저로 전송
     }
+
+    // id로 DELETE 요청 인입 시, 해당 글 삭제 위해 메서드 맵핑
+    @DeleteMapping("/api/articles/{id}")
+    public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
+        blogService.delete(id);
+
+        return ResponseEntity.ok()
+                .build();
+    }
 }
