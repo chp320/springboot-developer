@@ -22,3 +22,9 @@ spring:
   h2:
     console:
       enabled: true
+
+# JWT 토큰 사용을 위한 issuer, secret_key 설정
+jwt:
+  issuer: test@test.com
+  secret_key: study-springboot
+
