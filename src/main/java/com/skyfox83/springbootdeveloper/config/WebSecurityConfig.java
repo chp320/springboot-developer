@@ -38,6 +38,7 @@ public class WebSecurityConfig {
         return (web) -> web.ignoring()
                 .requestMatchers(toH2Console())
                 .requestMatchers(
+                        new AntPathRequestMatcher("/static/**"),
                         new AntPathRequestMatcher("/img/**"),
                         new AntPathRequestMatcher("/css/**"),
                         new AntPathRequestMatcher("/js/**")
@@ -78,6 +79,14 @@ public class WebSecurityConfig {
                                 new AntPathRequestMatcher("/user")
                         ).permitAll()
                         .anyRequest().authenticated()
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/articles")
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
                 )
                 .build();
     }
