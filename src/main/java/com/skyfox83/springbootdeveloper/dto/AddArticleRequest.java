@@ -14,10 +14,11 @@ public class AddArticleRequest {
     private String content;
 
     // 빌더 패턴을 이용해서 엔티티로 생성
-    public Article toEntity() {
+    public Article toEntity(String author) {
         return Article.builder()
                 .title(title)
                 .content(content)
+                .author(author)
                 .build();
     }
 }

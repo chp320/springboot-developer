@@ -17,8 +17,10 @@ public class BlogService {
     private final BlogRepository blogRepository;
 
     // 블로그 글 추가 메서드
-    public Article save(AddArticleRequest request) {
-        return blogRepository.save(request.toEntity());     // JpaRepository 에서 지원하는 저장 메서드 save() 로 AddArticleRequest 클래스에 저장된 값을 article DB에 저장
+    public Article save(AddArticleRequest request, String userName) {
+//        return blogRepository.save(request.toEntity());     // JpaRepository 에서 지원하는 저장 메서드 save() 로 AddArticleRequest 클래스에 저장된 값을 article DB에 저장
+        // 23.12.04 - userName(author) 추가 됨에 따라 유저 이름 반환하도록 수정
+        return blogRepository.save((request.toEntity(userName)));
     }
 
     // 블로그 글 전체 조회 메서드
