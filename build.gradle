@@ -43,6 +43,9 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt:0.9.1'     // 자바 jwt 라이브러리
     implementation 'javax.xml.bind:jaxb-api:2.3.1'  // xml 문서와 java 객체간 맵핑을 자동화
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"  // @ConfigurationProperties 사용 위함
+
+    // OAuth2 사용을 위한 의존성 추가
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('bootBuildImage') {

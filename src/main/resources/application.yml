@@ -28,3 +28,14 @@ jwt:
   issuer: test@test.com
   secret_key: study-springboot
 
+# OAuth2 사용을 위한 설정
+security:
+  oauth2:
+    client:
+      registration:
+        google:
+          client-id: 183438263541-5u1fm5hnd14v8qvha8rt0uostn2ipnas.apps.googleusercontent.com
+          client-secret: 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
+          scope:
+            - email
+            - profile
